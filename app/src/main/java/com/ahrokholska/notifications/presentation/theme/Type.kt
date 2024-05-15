@@ -1,4 +1,4 @@
-package com.ahrokholska.notifications.ui.theme
+package com.ahrokholska.notifications.presentation.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

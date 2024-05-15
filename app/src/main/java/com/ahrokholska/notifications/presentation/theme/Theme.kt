@@ -1,4 +1,4 @@
-package com.ahrokholska.notifications.ui.theme
+package com.ahrokholska.notifications.presentation.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
