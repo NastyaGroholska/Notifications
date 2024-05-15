@@ -32,3 +32,15 @@ val Typography = Typography(
     )
     */
 )
+
+val MainButtonStyle = TextStyle(
+    fontFamily = FontFamily.Default,
+    fontWeight = FontWeight.W500,
+    fontSize = 20.sp
+)
+
+val CounterStyle = TextStyle(
+    fontFamily = FontFamily.Default,
+    fontWeight = FontWeight.W500,
+    fontSize = 24.sp
+)
