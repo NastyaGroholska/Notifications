@@ -73,6 +73,9 @@ dependencies {
     //Hilt
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
+
+    //Permissions
+    implementation(libs.accompanist.permissions)
 }
 
 kapt {

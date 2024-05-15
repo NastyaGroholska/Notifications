@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">Notifications</string>
+    <string name="channel_name">Messages</string>
     <string name="create_new_notification">Create new notification</string>
+    <string name="notification_content_text">Notification %1$d</string>
+    <string name="notification_header">Chat heads active</string>
     <string name="page_was_removed">Page %1$d was removed</string>
+    <string name="notification_avatar_placeholder">N</string>
 </resources>
