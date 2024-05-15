@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Notifications</string>
     <string name="create_new_notification">Create new notification</string>
+    <string name="page_was_removed">Page %1$d was removed</string>
 </resources>
