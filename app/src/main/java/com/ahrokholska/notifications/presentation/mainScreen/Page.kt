@@ -1,6 +1,7 @@
 package com.ahrokholska.notifications.presentation.mainScreen
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,7 +20,6 @@ import androidx.compose.material.icons.filled.Remove
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -33,9 +33,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.ahrokholska.notifications.R
-import com.ahrokholska.notifications.ui.theme.CounterStyle
-import com.ahrokholska.notifications.ui.theme.MainButtonStyle
-import com.ahrokholska.notifications.ui.theme.NotificationsTheme
+import com.ahrokholska.notifications.presentation.theme.CounterStyle
+import com.ahrokholska.notifications.presentation.theme.MainButtonStyle
+import com.ahrokholska.notifications.presentation.theme.NotificationsTheme
 
 @Composable
 fun Page(
@@ -108,12 +108,13 @@ fun Page(
 
 @Composable
 private fun ActionButton(icon: ImageVector, onClick: () -> Unit) {
-    IconButton(
+    Box(
         modifier = Modifier
             .size(actionButtonSize)
             .shadow(elevation = 3.dp, shape = CircleShape)
-            .background(color = Color.White, shape = CircleShape),
-        onClick = onClick
+            .background(color = Color.White, shape = CircleShape)
+            .clickable { onClick() },
+        contentAlignment = Alignment.Center
     ) {
         Icon(
             imageVector = icon,
