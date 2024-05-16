@@ -13,6 +13,8 @@ import javax.inject.Inject
 class MainScreenViewModel @Inject constructor() : ViewModel() {
     private val _pages = MutableStateFlow(listOf(1))
     val pages = _pages.asStateFlow()
+    private val _pageToScrollTo = MutableStateFlow<Int?>(null)
+    val pageToScrollTo = _pageToScrollTo.asStateFlow()
 
     fun addPage(onSuccess: (Int) -> Unit) {
         viewModelScope.launch {
@@ -33,6 +35,18 @@ class MainScreenViewModel @Inject constructor() : ViewModel() {
                 it.toMutableList().apply { removeLast() }
             }
             onSuccess(removedPage)
+        }
+    }
+
+    fun updatePageToScrollTo(page: Int) {
+        viewModelScope.launch {
+            _pageToScrollTo.update { page }
+        }
+    }
+
+    fun scrollCompleted() {
+        viewModelScope.launch {
+            _pageToScrollTo.update { null }
         }
     }
 }
