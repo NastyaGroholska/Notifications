@@ -2,6 +2,9 @@ package com.ahrokholska.notifications.presentation.mainScreen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ahrokholska.notifications.domain.useCases.AddPageUseCase
+import com.ahrokholska.notifications.domain.useCases.GetPagesUseCase
+import com.ahrokholska.notifications.domain.useCases.RemovePageUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -10,11 +13,23 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainScreenViewModel @Inject constructor() : ViewModel() {
+class MainScreenViewModel @Inject constructor(
+    private val getPagesUseCase: GetPagesUseCase,
+    private val addPageUseCase: AddPageUseCase,
+    private val removePageUseCase: RemovePageUseCase,
+) : ViewModel() {
     private val _pages = MutableStateFlow(listOf(1))
     val pages = _pages.asStateFlow()
     private val _pageToScrollTo = MutableStateFlow<Int?>(null)
     val pageToScrollTo = _pageToScrollTo.asStateFlow()
+
+    init {
+        viewModelScope.launch {
+            getPagesUseCase()?.let { pages ->
+                _pages.update { pages }
+            }
+        }
+    }
 
     fun addPage(onSuccess: (Int) -> Unit) {
         viewModelScope.launch {
@@ -24,6 +39,7 @@ class MainScreenViewModel @Inject constructor() : ViewModel() {
                 it + addedPage
             }
             onSuccess(addedPage)
+            addPageUseCase()
         }
     }
 
@@ -35,6 +51,7 @@ class MainScreenViewModel @Inject constructor() : ViewModel() {
                 it.toMutableList().apply { removeLast() }
             }
             onSuccess(removedPage)
+            removePageUseCase()
         }
     }
 
