@@ -132,7 +132,12 @@ fun MainScreenContent(
         val pagerState = rememberPagerState(pageCount = { pages.size })
         LaunchedEffect(key1 = pageToScrollTo) {
             pageToScrollTo?.let {
-                pagerState.scrollToPage(it - 1)
+                snapshotFlow { pagerState.pageCount }.collect { pageCount ->
+                    if (pageCount >= it) {
+                        pagerState.scrollToPage(it - 1)
+                        cancel()
+                    }
+                }
                 onScrollCompleted()
             }
         }

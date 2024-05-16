@@ -24,6 +24,9 @@ class MainActivity : ComponentActivity() {
                 MainScreen(viewModel = viewModel)
             }
         }
+        intent.extras?.getInt(PAGE_NUMBER)?.let {
+            viewModel.updatePageToScrollTo(it)
+        }
     }
 
     override fun onNewIntent(intent: Intent) {
